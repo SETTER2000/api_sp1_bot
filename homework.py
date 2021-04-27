@@ -12,7 +12,6 @@ load_dotenv()
 
 PRAKTIKUM_TOKEN = os.getenv('PRAKTIKUM_TOKEN')
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
-URL_DOMASHKA = os.getenv('URL_DOMASHKA')
 CHAT_ID = os.getenv('CHAT_ID')
 LOG_NAME_FILE = os.getenv('LOG_NAME_FILE')
 bot = telegram.Bot(token=TELEGRAM_TOKEN)
@@ -41,7 +40,7 @@ def get_homework_statuses(current_timestamp):
         'from_date': current_timestamp - av.DATE_BEGIN
     }
     homework_statuses = requests.get(
-        URL_DOMASHKA,
+        av.URL_DOMASHKA,
         params=data,
         headers={'Authorization': f'OAuth {PRAKTIKUM_TOKEN}'})
     return homework_statuses.json()
