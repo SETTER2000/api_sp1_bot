@@ -4,9 +4,10 @@ import requests
 import telegram
 import time
 
-
 from dotenv import load_dotenv
-from . import advanced_value as av
+
+import advanced_value as av
+
 
 load_dotenv()
 
