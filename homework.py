@@ -37,7 +37,7 @@ def parse_homework_status(homework):
 def get_homework_statuses(current_timestamp):
     """Получить данные ревью."""
     data = {
-        'from_date': current_timestamp - av.DATE_BEGIN
+        'from_date': current_timestamp
     }
     homework_statuses = requests.get(
         av.URL_DOMASHKA,
