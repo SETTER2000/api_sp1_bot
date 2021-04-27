@@ -8,16 +8,14 @@ from dotenv import load_dotenv
 
 import advanced_value as av
 
-
 load_dotenv()
-
 
 PRAKTIKUM_TOKEN = os.getenv('PRAKTIKUM_TOKEN')
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 URL_DOMASHKA = os.getenv('URL_DOMASHKA')
 CHAT_ID = os.getenv('CHAT_ID')
 LOG_NAME_FILE = os.getenv('LOG_NAME_FILE')
-bot_client = telegram.Bot(token=TELEGRAM_TOKEN)
+bot = telegram.Bot(token=TELEGRAM_TOKEN)
 logging.basicConfig(
     level=logging.DEBUG,
     format='%(asctime)s, %(levelname)s, %(name)s, %(message)s',
@@ -49,7 +47,7 @@ def get_homework_statuses(current_timestamp):
     return homework_statuses.json()
 
 
-def send_message(message):
+def send_message(message, bot_client):
     """Отправить сообщение в Телеграм."""
     logging.info('Send message')
     return bot_client.send_message(chat_id=CHAT_ID, text=message)
@@ -65,14 +63,15 @@ def main():
             new_homework = get_homework_statuses(current_timestamp)
             if new_homework.get('homeworks'):
                 send_message(
-                    parse_homework_status(new_homework.get('homeworks')[0]))
+                    parse_homework_status(new_homework.get('homeworks')[0]),
+                    bot)
             current_timestamp = new_homework.get('current_date',
                                                  current_timestamp)
             time.sleep(av.TIME_SLEEP)
 
         except Exception as e:
             logging.error(f'{av.BOT_ERROR}: {e}')
-            send_message(f'{av.BOT_ERROR}: {e}')
+            send_message(f'{av.BOT_ERROR}: {e}', bot)
             print(f'{av.BOT_ERROR}: {e}')
             time.sleep(av.TIME_SLEEP)
 
