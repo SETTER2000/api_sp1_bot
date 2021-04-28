@@ -66,7 +66,6 @@ def main():
             bot)
     except Exception as e:
         logging.error(f'{av.BOT_ERROR}: {e}')
-        send_message(f'{av.BOT_ERROR}: {e}', bot)
 
     while True:
         try:
