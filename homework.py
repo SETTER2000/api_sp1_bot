@@ -10,9 +10,9 @@ import advanced_value as av
 
 load_dotenv()
 try:
-    PRAKTIKUM_TOKEN = os.environ.get('PRAKTIKUM_TOKEN')
-    TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN')
-    CHAT_ID = os.environ.get('CHAT_ID')
+    PRAKTIKUM_TOKEN = os.environ['PRAKTIKUM_TOKEN']
+    TELEGRAM_TOKEN = os.environ['TELEGRAM_TOKEN']
+    CHAT_ID = os.environ['CHAT_ID']
 except Exception as e:
     logging.error(f'{av.BOT_ERROR}: {e}')
 
