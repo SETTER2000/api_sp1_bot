@@ -59,6 +59,9 @@ def main():
     """Бот по опросу состояния ревью."""
     bot = telegram.Bot(token=TELEGRAM_TOKEN)
     logging.debug('Start bot')
+    send_message(
+        'Спасибо, что запустили меня. (bot Вася)',
+        bot)
     current_timestamp = int(time.time())
     while True:
         try:
