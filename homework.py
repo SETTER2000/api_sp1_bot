@@ -57,12 +57,17 @@ def send_message(message, bot_client):
 
 def main():
     """Бот по опросу состояния ревью."""
-    bot = telegram.Bot(token=TELEGRAM_TOKEN)
-    logging.debug('Start bot')
-    send_message(
-        'Спасибо, что запустили меня. (bot Вася)',
-        bot)
     current_timestamp = int(time.time())
+    try:
+        bot = telegram.Bot(token=TELEGRAM_TOKEN)
+        logging.debug('Start bot')
+        send_message(
+            'Спасибо, что запустили меня. (bot Вася)',
+            bot)
+    except Exception as e:
+        logging.error(f'{av.BOT_ERROR}: {e}')
+        send_message(f'{av.BOT_ERROR}: {e}', bot)
+
     while True:
         try:
             new_homework = get_homework_statuses(current_timestamp)
