@@ -37,12 +37,12 @@ def parse_homework_status(homework):
 def get_homework_statuses(current_timestamp):
     """Получить данные ревью."""
     try:
-        data = {'from_date': current_timestamp - 8600 * 30}
-        headers = {'Authorization': f'OAuth {PRAKTIKUM_TOKEN}'}
+        data = {'from_date': current_timestamp}
+        token = {'Authorization': f'OAuth {PRAKTIKUM_TOKEN}'}
         homework_statuses = requests.get(
             av.URL_DOMASHKA,
             params=data,
-            headers=headers)
+            headers=token)
         return homework_statuses.json()
     except Exception as e:
         logging.error(f'{av.BOT_ERROR}: {e}')
@@ -60,7 +60,6 @@ def main():
     bot = telegram.Bot(token=TELEGRAM_TOKEN)
     logging.debug('Start bot')
     current_timestamp = int(time.time())
-
     while True:
         try:
             new_homework = get_homework_statuses(current_timestamp)
