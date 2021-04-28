@@ -61,9 +61,7 @@ def main():
     try:
         bot = telegram.Bot(token=TELEGRAM_TOKEN)
         logging.debug('Start bot')
-        send_message(
-            'Спасибо, что запустили меня. (bot Вася)',
-            bot)
+        send_message('Спасибо, что запустили меня. (bot Вася)', bot)
     except Exception as e:
         logging.error(f'{av.BOT_ERROR}: {e}')
 
